@@ -47,12 +47,11 @@ class Colors {
   static const Color independenceBlue = const Color(0xFF304D6D);
 
 
-
-
-
-
-
-
+  //red cross
+  static const Color cornellRed = const Color(0xFFB41218);
+  static const Color geraniumLake = const Color(0xFFE8282C);
+  static const Color vividRed = const Color(0xFFF40D1A);
+  static const Color prune = const Color(0xFF6C0E23);
 }
 
 class Dimens {
@@ -65,6 +64,30 @@ class Dimens {
 class TextStyles {
 
   const TextStyles();
+
+  static const TextStyle upcomingDutiesCardTitle = const TextStyle(
+      color: Colors.prune,
+      fontWeight: FontWeight.w400,
+      fontSize: 15.0,
+  );
+
+  static const TextStyle upcomingDutiesPanelTitle = const TextStyle(
+      color: Colors.blackCoral,
+      fontFamily: 'Dunant',
+      fontWeight: FontWeight.w400,
+      fontSize: 20.0
+  );
+
+  static const TextStyle upcomingDutiesPanelSubtitle = const TextStyle(
+      color: Colors.blackCoral,
+      fontFamily: 'Dunant',
+      fontWeight: FontWeight.w300,
+      fontSize: 10.0
+  );
+
+
+
+
 
   static const TextStyle appBarTitle = const TextStyle(
       color: Colors.appBarTitle,
@@ -79,6 +102,8 @@ class TextStyles {
       fontWeight: FontWeight.w600,
       fontSize: 24.0
   );
+
+
 
   static const TextStyle dutyLocation = const TextStyle(
       color: Colors.dutyLocation,

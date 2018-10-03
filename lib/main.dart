@@ -1,226 +1,201 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:test_flttr/Design.dart' as Design;
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyAppState();
+  }
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Design.Colors.whiteSmoke,
         appBar: AppBar(
-          title: Text('Dienstplan Flltr Test 0'),
-          backgroundColor: Colors.grey,
+          title: Text('Dienstplan Flltr Test 1612'),
+          backgroundColor: Design.Colors.vividRed,
         ),
-        body: Column(
-          children: [
-            DutyPanel(
-              day: 'Mittwoch',
-              date: '03.10.2018',
-              time: '18:00 - 06:00 Uhr',
-              place: 'Kalsdorf',
-              unitType: 'RTW',
-              crew: 'Kerschner Benjamin, Ing.',
-            ),
-            DutyPanel(
-                day: 'Sonntag',
-                date: '28.10.2018',
-                time: '18:00 - 06:00 Uhr',
-                place: 'Kalsdorf',
-                unitType: 'RTW',
-                crew: ''),
-            DutyNew(
-              day: 'Sonntag',
-              date: '14.10.2018',
-              time: '18:00 - 06:00 Uhr',
-              place: 'Kalsdorf',
-              unitType: 'RTW',
-              crew: '',
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DutyNew extends StatelessWidget {
-  DutyNew(
-      {this.day, this.date, this.time, this.place, this.unitType, this.crew});
-
-  final String day;
-  final String date;
-  final String time;
-  final String place;
-  final String unitType;
-  final String crew;
-
-  @override
-  Widget build(BuildContext context) {
-    final dutyCardNew = new Container(
-      margin: const EdgeInsets.only(left: 0.5, right: 0.5),
-      decoration: new BoxDecoration(
-        color: Design.Colors.blueJeans,
-        shape: BoxShape.rectangle,
-        borderRadius: new BorderRadius.circular(8.0),
-        boxShadow: <BoxShadow>[
-          new BoxShadow(
-              color: Colors.grey,
-              blurRadius: 500.0,
-              offset: new Offset(0.0, 10.0))
-        ],
-      ),
-      child: new Container(
-        margin: const EdgeInsets.only(top: 16.0, left: 10.0),
-        constraints: new BoxConstraints.expand(),
-        child: new Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Text(date, style: Design.TextStyles.dutyTitle),
-            new Text(day + ' ' + time, style: Design.TextStyles.dutyLocation),
-/*
-            new Container(
-                color: const Color(0xFF00C6FF),
-                width: 24.0,
-                height: 1.0,
-                margin: const EdgeInsets.symmetric(vertical: 8.0)),
-  */
-            new Row(
-              children: <Widget>[
-                new Icon(Icons.location_on,
-                    size: 14.0, color: Design.Colors.planetDistance),
-                new Text(place, style: Design.TextStyles.planetDistance),
-                new Container(width: 24.0),
-                new Icon(Icons.drive_eta,
-                    size: 14.0, color: Design.Colors.planetDistance),
-                new Text(unitType, style: Design.TextStyles.planetDistance),
-              ],
-            ),
-            new Row(
-              children: <Widget>[
-                new Icon(Icons.people,
-                    size: 14.0, color: Design.Colors.planetDistance),
-                new Text(crew, style: Design.TextStyles.planetDistance),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-
-    return new Container(
-      height: 100.0,
-      margin: const EdgeInsets.only(top: 16.0, bottom: 4.0),
-      child: new FlatButton(
-        onPressed: () {},
-        child: new Stack(
-          children: <Widget>[
-            dutyCardNew,
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DutyPanel extends StatelessWidget {
-  DutyPanel(
-      {this.day, this.date, this.time, this.place, this.unitType, this.crew});
-
-  final String day;
-  final String date;
-  final String time;
-  final String place;
-  final String unitType;
-  final String crew;
-
-  @override
-  Widget build(BuildContext context) {
-    final dutyPanel = new Container(
-      child: new ExpansionPanelList(
-        key: key,
-        children: <ExpansionPanel>[
-          new ExpansionPanel(
-            headerBuilder: (BuildContext context, bool isExpanded) =>
-                new Text(date + ' - ' + time),
-            body: new Container(
+        body: new SingleChildScrollView(
+          child: new SafeArea(
+            child: new Material(
               child: new Column(
                 children: <Widget>[
-                  new Row(
-                    children: <Widget>[
-                      new Icon(Icons.location_on,
-                          size: 14.0, color: Design.Colors.planetDistance),
-                      new Text(place, style: Design.TextStyles.planetDistance),
-                      new Container(width: 24.0),
-                      new Icon(Icons.drive_eta,
-                          size: 14.0, color: Design.Colors.planetDistance),
-                      new Text(unitType,
-                          style: Design.TextStyles.planetDistance),
-                    ],
-                  ),
-                  new Row(
-                    children: <Widget>[
-                      new Icon(Icons.people,
-                          size: 14.0, color: Design.Colors.planetDistance),
-                      new Text(crew, style: Design.TextStyles.planetDistance),
-                    ],
-                  )
+                  new Row(children: [
+                    new Icon(Icons.filter_b_and_w),
+                    new Text('Willkommen')
+                  ]),
+                  new Card(
+                      child: Column(children: [
+                    new Row(
+                      children: [
+                        new Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
+                          child: new Text(
+                            'Upcoming Duties',
+                            textAlign: TextAlign.left,
+                            style: Design.TextStyles.upcomingDutiesCardTitle,
+                          ),
+                        ),
+                      ],
+                    ),
+                    new ExpansionList(
+                      [
+                        new DutyItem(
+                          day: "Montag",
+                          date: "01.01.1970",
+                          time: "18:00 - 06:00",
+                          place: "Kalsdorf",
+                          unitType: "PRW",
+                          crew: "",
+                          isExpandedInitially: false,
+                        ),
+                        new DutyItem(
+                          day: "Dienstag",
+                          date: "02.01.1970",
+                          time: "18:00 - 06:00",
+                          place: "Kalsdorf",
+                          unitType: "PRW",
+                          crew: "Oh, Crew :o",
+                          isExpandedInitially: false,
+                        ),
+                      ],
+                    ),
+                  ])),
+                  new Card(
+                      child: Column(children: <Widget>[
+                    new Row(
+                      children: [
+                        new Container(
+                          margin: const EdgeInsets.all(5.0),
+                          padding: const EdgeInsets.all(5.0),
+                          child: new Text(
+                            'Offene Dienste',
+                            textAlign: TextAlign.left,
+                            style: Design.TextStyles.upcomingDutiesCardTitle,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ]))
                 ],
               ),
             ),
-            isExpanded: true,
           ),
-        ],
-        animationDuration: kThemeAnimationDuration,
+        ),
       ),
     );
-
-    return dutyPanel;
   }
 }
 
-class DutyContainer extends StatefulWidget {
-  @override
-  DutyContainerState createState() => new DutyContainerState();
-}
-
 class DutyItem {
-  DutyItem({this.isExpanded: false, this.header, this.body});
+  final String day;
+  final String date;
+  final String time;
+  final String place;
+  final String unitType;
+  final String crew;
+  bool isExpandedInitially;
 
-  bool isExpanded;
-  final String header;
-  final String body;
+  DutyItem({
+    /// All items are required to render the duty correctly.
+    /// If some info isn't available, just give it an empty String ('')!
+    /// e.g. if these is no crew yet just call it with crew: "".
+    @required this.day,
+    @required this.date,
+    @required this.time,
+    @required this.place,
+    @required this.unitType,
+    @required this.crew,
+    this.isExpandedInitially = false,
+  })  : assert(day != null),
+        assert(time != null),
+        assert(time != null),
+        assert(place != null),
+        assert(unitType != null),
+        assert(crew != null);
+
+  ExpansionPanelHeaderBuilder get headerBuilder =>
+      (context, isExpanded) => new Column(children: [
+            new Text(
+              day + ', ' + date,
+              style: Design.TextStyles.upcomingDutiesPanelTitle,
+            ),
+            new Text(
+              time,
+              style: Design.TextStyles.upcomingDutiesPanelSubtitle,
+            )
+          ]);
 }
 
-class DutyContainerState extends State<DutyContainer> {
-  List<DutyItem> _items = <DutyItem>[
-    new DutyItem(header: 'Duty header Info', body: 'Duty body Info')
-  ];
+class ExpansionList extends StatefulWidget {
+  /// The items that the expansion list should display; this can change
+  /// over the course of the object but probably shouldn't as it won't
+  /// transition nicely or anything like that.
+  final List<DutyItem> duty;
+
+  ExpansionList(this.duty) {
+    // quick check to make sure there's no duplicate dates.
+    // todo: check if this makes sense at all! (Mehrere Dienste an einem Tag möglich!)
+    assert(new Set.from(duty.map((li) => li.date)).length == duty.length);
+  }
+
+  @override
+  State<StatefulWidget> createState() => new ExpansionListState();
+}
+
+class ExpansionListState extends State<ExpansionList> {
+  Map<String, bool> expandedByTitle = new Map();
 
   @override
   Widget build(BuildContext context) {
-    return new ListView(
-      children: [
-        new ExpansionPanelList(
-          expansionCallback: (int index, bool isExpanded) {
-            setState(() {
-              _items[index].isExpanded = !_items[index].isExpanded;
-            });
-          },
-          children: _items.map((DutyItem item) {
-            return new ExpansionPanel(
-              headerBuilder: (BuildContext context, bool isExpanded) {
-                return new Text(item.header);
-              },
-              isExpanded: item.isExpanded,
-              body: new Container(
-                child: new Text('whatever'),
-              ),
-            );
-          }).toList(),
-        ),
-      ],
+    return new ExpansionPanelList(
+      children: widget.duty
+          .map(
+            (item) => new ExpansionPanel(
+                headerBuilder: item.headerBuilder,
+                body: new Container(
+                  child: new Column(
+                    children: <Widget>[
+                      new Row(
+                        children: <Widget>[
+                          new Icon(Icons.location_on,
+                              size: 14.0, color: Design.Colors.planetDistance),
+                          new Text(item.place,
+                              style: Design.TextStyles.planetDistance),
+                          new Container(width: 24.0),
+                          new Icon(Icons.drive_eta,
+                              size: 14.0, color: Design.Colors.planetDistance),
+                          new Text(item.unitType,
+                              style: Design.TextStyles.planetDistance),
+                        ],
+                      ),
+                      new Row(
+                        children: <Widget>[
+                          new Icon(Icons.people,
+                              size: 14.0, color: Design.Colors.planetDistance),
+                          new Text(item.crew,
+                              style: Design.TextStyles.planetDistance),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                isExpanded:
+                    expandedByTitle[item.day] ?? item.isExpandedInitially),
+          )
+          .toList(growable: false),
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          expandedByTitle[widget.duty[index].day] = !isExpanded;
+        });
+      },
     );
   }
 }
